@@ -1,13 +1,19 @@
 import mysql.connector
 
 host = 'localhost'
-dbname = 'banco_crudpy'
 user = 'root'
 password = 'root'
+dbname = 'banco_crudpy'
 
-connect = mysql.connector.connect(host= host, user= user, password= password, database= dbname)
-cursor = connect.cursor()
-print ("conectado com sucesso ao banco de dados.")
+def conectar (host, user, password, dbname):
 
-cursor.close()
-connect.close()
+    try:
+        connect = mysql.connector.connect(host= host, user= user, password= password, database= dbname)
+    
+        print ("Conectado com sucesso ao banco de dados.")
+        return connect
+
+    except mysql.connector.Error as err:
+
+        print ("Erro ao conectar ao banco de dados:", {err})
+        return connect.close
